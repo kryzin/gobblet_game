@@ -10,4 +10,5 @@ The main premise of the game is to keep the Cat alive. :)
 If you choose the wrong icon, you lose a point and the Cat gets angry. Depending on the difficulty the timer gets shorter and you get fewer chances to make mistakes.
 
 
-Maybe: some achievements unlock different colors of the Cat.
+Scripts: select a random need in the Cat's thought bubble, change the Cat's appearance when a point is lost, timer. 
+Maybe: double points gain after a significant streak, some achievements unlock different colors of the Cat.
