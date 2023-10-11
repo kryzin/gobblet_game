@@ -1,14 +1,7 @@
-# game_unity
+# Gobblet Game (3D)
+
+ # Inspiracja
+ ![](https://github.com/kryzin/game_unity/blob/main/gobblet.jpg)
+ # Zasady gry
+ Gra dwuosobowa na planszy 3x3 (lub 4x4), wygrywa osoba która utworzy z pionków swojego koloru linię o długości 3. Podobna do kółka i krzyżyk z dodatkowym elementem wielkości pionków. Pionki posiadają 3 wielkości i mogą nakładać się na stojące już na planszy pionki jeśli są od nich większe, niezależnie od koloru. 
  
-The main premise of the game is to keep the Cat alive. :) 
-
-## mockup gameplay
-![](https://github.com/kryzin/game_unity/blob/main/IMG_2811.gif)
-
-## what is going on? 
-![](https://github.com/kryzin/game_unity/blob/main/image.png)
-If you choose the wrong icon, you lose a point and the Cat gets angry. Depending on the difficulty the timer gets shorter and you get fewer chances to make mistakes.
-
-
-Scripts: select a random need in the Cat's thought bubble, change the Cat's appearance when a point is lost, timer. 
-Maybe: double points gain after a significant streak, some achievements unlock different colors of the Cat.
