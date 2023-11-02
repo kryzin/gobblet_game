@@ -23,3 +23,9 @@ Try to organize this pls
 
 - X object
 - materials + highlight variants
+
+## Docs
+
+what I used so far (outside of labs):
+
+- (Pointer Events)![https://www.youtube.com/watch?v=kkkmX3_fvfQ&list=WL&index=28&ab_channel=Andrew]
