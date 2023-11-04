@@ -761,10 +761,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 546998305}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c78440da4b4094a891be1b2a8d1d12, type: 3}
+  m_Script: {fileID: 11500000, guid: 88a4e1741fcd6ec4493bf9140a0aa8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: e55e00653c236dd47a493d1d5a40830b, type: 2}
+  hasMoved: 0
 --- !u!65 &546998310
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -947,10 +948,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 616794380}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c78440da4b4094a891be1b2a8d1d12, type: 3}
+  m_Script: {fileID: 11500000, guid: 88a4e1741fcd6ec4493bf9140a0aa8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: e2342420a0ae6e945b80859dfa3b9815, type: 2}
+  hasMoved: 0
 --- !u!1 &739596618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,10 +1087,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 833444922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c78440da4b4094a891be1b2a8d1d12, type: 3}
+  m_Script: {fileID: 11500000, guid: 88a4e1741fcd6ec4493bf9140a0aa8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: e55e00653c236dd47a493d1d5a40830b, type: 2}
+  hasMoved: 0
 --- !u!65 &833444927
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1658,10 +1661,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1102137197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c78440da4b4094a891be1b2a8d1d12, type: 3}
+  m_Script: {fileID: 11500000, guid: 88a4e1741fcd6ec4493bf9140a0aa8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: e2342420a0ae6e945b80859dfa3b9815, type: 2}
+  hasMoved: 0
 --- !u!1 &1131358896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,10 +1783,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1131358896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c78440da4b4094a891be1b2a8d1d12, type: 3}
+  m_Script: {fileID: 11500000, guid: 88a4e1741fcd6ec4493bf9140a0aa8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: e2342420a0ae6e945b80859dfa3b9815, type: 2}
+  hasMoved: 0
 --- !u!1001 &1293127327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2687,10 +2692,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1612405734}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3c78440da4b4094a891be1b2a8d1d12, type: 3}
+  m_Script: {fileID: 11500000, guid: 88a4e1741fcd6ec4493bf9140a0aa8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMaterial: {fileID: 2100000, guid: e55e00653c236dd47a493d1d5a40830b, type: 2}
+  hasMoved: 0
 --- !u!65 &1612405739
 BoxCollider:
   m_ObjectHideFlags: 0

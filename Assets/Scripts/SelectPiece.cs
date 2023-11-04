@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SelectTurn : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class SelectPiece : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     // for lifting up/down
-    private float hoverAmount = 1.6f;
-    private float hoverSpeed = 5f;
+    private float hoverAmount = 2.6f;
+    private float hoverSpeed = 3f;
     private Vector3 initialPosition;
     private bool isHovering = false;
 
@@ -18,6 +18,7 @@ public class SelectTurn : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     // for selecting object
     private float clickHoverAmount = 2.4f;
+    public bool hasMoved = false;
 
     void Start()
     {
@@ -29,22 +30,22 @@ public class SelectTurn : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void OnPointerClick(PointerEventData eventData) // check is object is clicked
     {
         Debug.Log("Pointer Click " + gameObject.name);
-        if (!BoardManager.isPlayerSelected) 
+        if (!BoardManager.isPieceSelected && !hasMoved) 
         {
-            if (BoardManager.selectedObject != null && BoardManager.selectedObject != this) // reset any currently selected
+            if (BoardManager.selectedPiece != null && BoardManager.selectedPiece != this) // reset any currently selected
             {
-                BoardManager.selectedObject.GetComponent<SelectTurn>().ResetPosition();
-                BoardManager.isPlayerSelected = false;
+                BoardManager.selectedPiece.GetComponent<SelectPiece>().ResetPosition();
+                BoardManager.isPieceSelected = false;
             }
-            BoardManager.selectedObject = gameObject;
-            BoardManager.isPlayerSelected = true;
+            BoardManager.selectedPiece = gameObject;
+            BoardManager.isPieceSelected = true;
             ClickHover(); // highlight selected
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData) // when you hover over object
     {
-        if(!BoardManager.isPlayerSelected)
+        if(!BoardManager.isPieceSelected && !hasMoved)
         {
             Debug.Log("Pointer Enter " + gameObject.name);
             isHovering = true;
@@ -53,7 +54,7 @@ public class SelectTurn : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerExit(PointerEventData eventData) // when you stop hovering
     {
-        if(!BoardManager.isPlayerSelected)
+        if(!BoardManager.isPieceSelected)
         {
             Debug.Log("Pointer Exit " + gameObject.name);
             isHovering = false;
@@ -62,7 +63,7 @@ public class SelectTurn : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     void Update()
     {
-        if(!BoardManager.isPlayerSelected) // update object position/color is they are selected/hovering
+        if(!BoardManager.isPieceSelected) // update object position/color is they are selected/hovering
         {
             if (isHovering)
             {
@@ -76,11 +77,11 @@ public class SelectTurn : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject()) // reset selected is clicked outside object
         {
             // Check if mouse is clicked outside of any object
-            if (BoardManager.selectedObject != null)
+            if (BoardManager.selectedPiece != null)
             {
-                BoardManager.selectedObject.GetComponent<SelectTurn>().ResetPosition();
-                BoardManager.isPlayerSelected = false;
-                BoardManager.selectedObject = null;
+                BoardManager.selectedPiece.GetComponent<SelectPiece>().ResetPosition();
+                BoardManager.isPieceSelected = false;
+                BoardManager.selectedPiece = null;
             }
         }
     }
@@ -93,17 +94,30 @@ public class SelectTurn : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     void ResetPosition()
     {
-        Vector3 targetPosition = new Vector3(initialPosition.x, initialPosition.y, initialPosition.z);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * hoverSpeed);
+        if (!hasMoved)
+        {
+            Vector3 targetPosition = new Vector3(initialPosition.x, initialPosition.y, initialPosition.z);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * hoverSpeed);
+        }
+        
         renderer.material = originalMaterial;
         isHovering = false;
     }
 
     void ClickHover()
     {
-        Vector3 targetPosition = new Vector3(initialPosition.x, initialPosition.y + clickHoverAmount, initialPosition.z);
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * hoverSpeed);
+        if (!hasMoved)
+        {
+            Vector3 targetPosition = new Vector3(initialPosition.x, initialPosition.y + clickHoverAmount, initialPosition.z);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * hoverSpeed);
+        }
+        
         renderer.material = outlineMaterial; 
+    }
+
+    public void SetMoved(bool moved)
+    {
+        hasMoved = moved;
     }
 }
 

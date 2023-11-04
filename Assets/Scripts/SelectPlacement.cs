@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -21,7 +22,7 @@ public class SelectPlacement : MonoBehaviour, IPointerClickHandler, IPointerEnte
 
     void Update()
     {
-        if (BoardManager.isPlayerSelected && !BoardManager.isPlacementSelected)
+        if (BoardManager.isPieceSelected && !BoardManager.isPlacementSelected)
         {
             if (isHovering)
             {
@@ -47,18 +48,26 @@ public class SelectPlacement : MonoBehaviour, IPointerClickHandler, IPointerEnte
     {
         Debug.Log("PLACEMENT clicked place: " + gameObject.name);
 
-        if (!BoardManager.isPlacementSelected)
+        int index = Array.IndexOf(BoardManager.placements, gameObject);
+        Debug.Log(index);
+        if (BoardManager.pieces[index] == null) // checking if square is empty ++++++++++ add checking size here
         {
-            if (BoardManager.selectedPlacement != null && BoardManager.selectedPlacement != this)
+            if (!BoardManager.isPlacementSelected)
             {
-                BoardManager.selectedPlacement.GetComponent<SelectPlacement>().ResetPosition();
-                BoardManager.isPlacementSelected = false;
+                if (BoardManager.selectedPlacement != null && BoardManager.selectedPlacement != this)
+                {
+                    BoardManager.selectedPlacement.GetComponent<SelectPlacement>().ResetPosition();
+                    BoardManager.isPlacementSelected = false;
+                }
+                BoardManager.selectedPlacement = gameObject;
+                BoardManager.isPlacementSelected = true;
+                Debug.Log("now the object moves to: " + gameObject.name);
+                BoardManager boardManager = FindObjectOfType<BoardManager>();
+                boardManager.MovePiece();
             }
-            BoardManager.selectedPlacement = gameObject;
-
-            BoardManager.isPlacementSelected = true;
-            Debug.Log("now the object moves to: " + gameObject.name);
         }
+        // add else where maybe placement lights up red, or error message on screen, or reset selection completly
+        
     }
     public void OnPointerEnter(PointerEventData eventData) // when you hover over object
     {
