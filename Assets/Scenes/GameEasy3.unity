@@ -839,6 +839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e533beb4ca019143bfcc43a0edb41a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1124690823}
 --- !u!1 &616794380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,7 +1573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f167d48272d2d04b93d36fa148a7a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  board: {fileID: 0}
+  board: {fileID: 587225591}
   currentPlayer: 0
   selectedPiece: {fileID: 0}
   selectedSquare: {fileID: 0}
