@@ -26,7 +26,7 @@ public class Piece : MonoBehaviour
     private Renderer renderer;
 
     // for selecting
-    public bool IsUsed {  get; private set; }
+    public bool isUsed = false;
 
 
     void Start()
@@ -38,8 +38,8 @@ public class Piece : MonoBehaviour
 
     void Update()
     {
-        if (gameManager.currentPlayer == PlayerColor.Red && color == PlayerColor.Red && !IsUsed ||
-        gameManager.currentPlayer == PlayerColor.Blue && color == PlayerColor.Blue && !IsUsed)
+        if (gameManager.currentPlayer == PlayerColor.Red && color == PlayerColor.Red && !isUsed ||
+        gameManager.currentPlayer == PlayerColor.Blue && color == PlayerColor.Blue && !isUsed)
         {
             if (isHovering)
             {
@@ -54,13 +54,20 @@ public class Piece : MonoBehaviour
 
     public void PlacePiece()
     {
-        IsUsed = true;
+        isUsed = true;
     }
 
     public void OnMouseDown()
     {
-        if (!IsUsed)
+        Debug.Log("clicked on Used: " + isUsed);
+        if (!isUsed && color == gameManager.currentPlayer)
         {
+            if (gameManager.selectedPiece != null && gameManager.selectedPiece != this)
+            {
+                gameManager.selectedPiece.isSelected = false;
+                gameManager.selectedPiece.ResetSelection();
+                gameManager.DeselectPiece();
+            }
             Debug.Log("Click " + gameObject.name);
             isSelected = true;
             gameManager.SelectPiece(this);
@@ -70,7 +77,7 @@ public class Piece : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        if (!IsUsed)
+        if (!isUsed)
         {
             isHovering = true;
         }
@@ -82,7 +89,7 @@ public class Piece : MonoBehaviour
         {
             isHovering = false;
         }
-        else if (!IsUsed)
+        else if (!isUsed)
         {
             ClickHover();
         }
@@ -113,5 +120,6 @@ public class Piece : MonoBehaviour
     public void ResetSelection()
     {
         renderer.material = originalMaterial;
+        ResetPosition();
     }
 }
