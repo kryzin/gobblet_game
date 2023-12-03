@@ -3,7 +3,7 @@
 Karolina Ryzińska/162272
 
 ## Gameplay Showcase
-<iframe width="560" height="315" src="https://imgur.com/a/NL74WWx" frameborder="0"></iframe>
+
 
 ## Zasady gry
 
