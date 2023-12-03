@@ -2,9 +2,8 @@
 
 Karolina Ryzińska/162272
 
-## Gra na wzór
-
- ![game image](https://github.com/kryzin/game_unity/blob/main/gobblet.jpg)
+## Gameplay Showcase
+![gameplay vid](https://imgur.com/a/NL74WWx)
 
 ## Zasady gry
 
