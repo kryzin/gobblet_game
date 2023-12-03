@@ -14,7 +14,7 @@ public class Square : MonoBehaviour
     // for highlighting 
     private Material originalMaterial;
     public Material outlineMaterial;
-    private Renderer renderer;
+    private Renderer squareRenderer;
 
     // for saving board placement
     public int row;
@@ -22,8 +22,8 @@ public class Square : MonoBehaviour
 
     void Start()
     {
-        renderer = GetComponent<Renderer>();
-        originalMaterial = renderer.material;
+        squareRenderer = GetComponent<Renderer>();
+        originalMaterial = squareRenderer.material;
     }
 
     void Update()
@@ -55,8 +55,11 @@ public class Square : MonoBehaviour
 
     public void OnMouseDown()
     {
-        Debug.Log("PLACEMENT Click: " + gameObject.name);
-        gameManager.SelectSquare(this);
+        if (!gameManager.isEnd)
+        {
+            Debug.Log("PLACEMENT Click: " + gameObject.name);
+            gameManager.SelectSquare(this);
+        }
     }
     public void OnMouseEnter()
     {
@@ -76,12 +79,12 @@ public class Square : MonoBehaviour
 
     void Hover()
     {
-        renderer.material = outlineMaterial;
+        squareRenderer.material = outlineMaterial;
     }
 
     public void ResetSelection()
     {
-        renderer.material = originalMaterial;
+        squareRenderer.material = originalMaterial;
         isHovering = false;
     }
 }

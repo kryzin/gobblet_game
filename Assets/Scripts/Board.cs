@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    public Piece[,] board = new Piece[3, 3];
+    private Piece[,] board = new Piece[3, 3];
+    public bool isGameOver = false;
     public GameManager gameManager;
+    public GameManager.PlayerColor winner;
+    private bool checkOnce = false;
 
     void Update()
     {
-        if (IsGameOver())
+        IsGameOver();
+        if (isGameOver)
         {
-            Debug.Log("GAME OVER");
+            if(!checkOnce)
+            {
+                Debug.Log("GAME OVER");
+                gameManager.GameOver();
+            }
+            checkOnce = true;
         }
     }
 
     public void InitializeBoard()
     {
+        checkOnce = false;
         Debug.Log("starting game");
         for (int i = 0; i < 3; i++) // resetting board state
         {
@@ -35,7 +45,7 @@ public class Board : MonoBehaviour
         board[row, col] = piece;
     }
 
-    public bool IsGameOver()
+    public void IsGameOver()
     {
         // Check rows
         for (int i = 0; i < 3; i++)
@@ -43,7 +53,8 @@ public class Board : MonoBehaviour
             if (board[i, 0] != null && board[i, 1] != null && board[i, 2] != null &&
                 board[i, 0].color == board[i, 1].color && board[i, 1].color == board[i, 2].color)
             {
-                return true;
+                winner = board[i, 0].color;
+                isGameOver = true;
             }
         }
 
@@ -53,7 +64,8 @@ public class Board : MonoBehaviour
             if (board[0, i] != null && board[1, i] != null && board[2, i] != null &&
                 board[0, i].color == board[1, i].color && board[1, i].color == board[2, i].color)
             {
-                return true;
+                winner = board[0, i].color;
+                isGameOver = true;
             }
         }
 
@@ -61,16 +73,16 @@ public class Board : MonoBehaviour
         if (board[0, 0] != null && board[1, 1] != null && board[2, 2] != null &&
             board[0, 0].color == board[1, 1].color && board[1, 1].color == board[2, 2].color)
         {
-            return true;
+            winner = board[0, 0].color;
+            isGameOver = true;
         }
 
         // Check anti-diagonal
         if (board[0, 2] != null && board[1, 1] != null && board[2, 0] != null &&
             board[0, 2].color == board[1, 1].color && board[1, 1].color == board[2, 0].color)
         {
-            return true;
+            winner = board[0, 2].color;
+            isGameOver = true;
         }
-
-        return false;
     }
 }

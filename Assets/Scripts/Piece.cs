@@ -23,7 +23,7 @@ public class Piece : MonoBehaviour
     // for highlighting 
     private Material originalMaterial;
     public Material outlineMaterial;
-    private Renderer renderer;
+    private Renderer pieceRenderer;
 
     // for selecting
     public bool isUsed = false;
@@ -32,8 +32,8 @@ public class Piece : MonoBehaviour
     void Start()
     {
         initialPosition = transform.position;
-        renderer = GetComponent<Renderer>();
-        originalMaterial = renderer.material;
+        pieceRenderer = GetComponent<Renderer>();
+        originalMaterial = pieceRenderer.material;
     }
 
     void Update()
@@ -59,25 +59,28 @@ public class Piece : MonoBehaviour
 
     public void OnMouseDown()
     {
-        Debug.Log("clicked on Used: " + isUsed);
-        if (!isUsed && color == gameManager.currentPlayer)
+        if (!gameManager.isEnd)
         {
-            if (gameManager.selectedPiece != null && gameManager.selectedPiece != this)
+            Debug.Log("clicked on Used: " + isUsed);
+            if (!isUsed && color == gameManager.currentPlayer)
             {
-                gameManager.selectedPiece.isSelected = false;
-                gameManager.selectedPiece.ResetSelection();
-                gameManager.DeselectPiece();
+                if (gameManager.selectedPiece != null && gameManager.selectedPiece != this)
+                {
+                    gameManager.selectedPiece.isSelected = false;
+                    gameManager.selectedPiece.ResetSelection();
+                    gameManager.DeselectPiece();
+                }
+                Debug.Log("Click " + gameObject.name);
+                isSelected = true;
+                gameManager.SelectPiece(this);
+                ClickHover();
             }
-            Debug.Log("Click " + gameObject.name);
-            isSelected = true;
-            gameManager.SelectPiece(this);
-            ClickHover();
-        }    
+        }
     }
 
     public void OnMouseEnter()
     {
-        if (!isUsed)
+        if (!isUsed && !gameManager.isEnd)
         {
             isHovering = true;
         }
@@ -89,7 +92,7 @@ public class Piece : MonoBehaviour
         {
             isHovering = false;
         }
-        else if (!isUsed)
+        else if (!isUsed && !gameManager.isEnd)
         {
             ClickHover();
         }
@@ -105,7 +108,7 @@ public class Piece : MonoBehaviour
     {
         Vector3 targetPosition = new Vector3(initialPosition.x, initialPosition.y, initialPosition.z);
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * hoverSpeed);
-        renderer.material = originalMaterial;
+        pieceRenderer.material = originalMaterial;
         isHovering = false;
     }
 
@@ -114,12 +117,12 @@ public class Piece : MonoBehaviour
         Vector3 targetPosition = new Vector3(initialPosition.x, initialPosition.y + clickHoverAmount, initialPosition.z);
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * hoverSpeed);
 
-        renderer.material = outlineMaterial;
+        pieceRenderer.material = outlineMaterial;
     }
 
     public void ResetSelection()
     {
-        renderer.material = originalMaterial;
+        pieceRenderer.material = originalMaterial;
         ResetPosition();
     }
 }

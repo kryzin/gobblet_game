@@ -7,18 +7,12 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        Debug.Log("Going into GameMenu to choose difficulty");
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame()
     {
         Debug.Log("Quitting game");
         Application.Quit();
-    }
-
-    public void SettingsMenu()
-    {
-        Debug.Log("the buttons in Menu should now change :) ");
     }
 }
