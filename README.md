@@ -3,7 +3,11 @@
 Karolina Ryzińska/162272
 
 ## Gameplay Showcase
-![](https://imgur.com/a/NL74WWx.mp4)
+
+
+https://github.com/kryzin/game_unity/assets/76969276/224b5522-cd18-441e-ab68-88f0f9a76117
+
+
 
 ## Zasady gry
 
