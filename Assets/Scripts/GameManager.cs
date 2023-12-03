@@ -125,9 +125,6 @@ public class GameManager : MonoBehaviour
         pieceRigidbody.isKinematic = false;
         pieceRigidbody.MovePosition(targetPosition);
 
-        
-        
-        //selectedPiece.transform.position = targetPosition;
         Debug.Log("move made");
         canSelect = true;
     }
