@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public int scoreRed = 0;
     public int scoreBlue = 0;
     public bool isEnd = false;
-    public bool canSelect = true;
+    // public bool canSelect = true;
 
     void Start()
     {
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     public void MovePiece() // moves selected Piece to center of selected Square
     {
-        canSelect = false;
+        // canSelect = false;
         float sizeAdd;
         if (selectedPiece.size == Piece.Size.Small) sizeAdd = 17f;
         else if (selectedPiece.size == Piece.Size.Medium) sizeAdd = 15f;
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         pieceRigidbody.MovePosition(targetPosition);
 
         Debug.Log("move made");
-        canSelect = true;
+        // canSelect = true;
     }
 
     public void GameOver()

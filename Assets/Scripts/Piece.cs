@@ -54,7 +54,8 @@ public class Piece : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (!gameManager.isEnd && gameManager.canSelect) // canSelect just to minimize objects running into each other
+        //if (!gameManager.isEnd && gameManager.canSelect) // canSelect just to minimize objects running into each other
+        if (!gameManager.isEnd)
         {
             if (!isUsed && color == gameManager.currentPlayer) // only interact with currentTurn color
             {
@@ -74,7 +75,8 @@ public class Piece : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        if (!isUsed && !gameManager.isEnd && gameManager.canSelect)
+        //if (!isUsed && !gameManager.isEnd && gameManager.canSelect)
+        if (!isUsed && !gameManager.isEnd)
         {
             isHovering = true;
         }
@@ -86,7 +88,8 @@ public class Piece : MonoBehaviour
         {
             isHovering = false;
         }
-        else if (!isUsed && !gameManager.isEnd && gameManager.canSelect)
+        //else if (!isUsed && !gameManager.isEnd && gameManager.canSelect)
+        else if (!isUsed && !gameManager.isEnd)
         {
             ClickHover();
         }
