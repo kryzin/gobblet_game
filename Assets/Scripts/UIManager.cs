@@ -12,12 +12,12 @@ public class UIManager : MonoBehaviour
     public TMP_Text timerDisplay;
     private bool isTimer = false;
     private float timer = 0.0f;
-
     public TMP_Text tally;
+    public TMP_Text playerTurn;
 
     void Start()
     {
-        popUp.SetActive(false);
+        popUp.SetActive(false); // dont show pop up at start
         StartTimer();
     }
 
@@ -29,18 +29,24 @@ public class UIManager : MonoBehaviour
             DisplayTimer();
         }
         DisplayTally();
+        DisplayPlayer();
     }
 
     void DisplayTimer()
     {
         int min = Mathf.FloorToInt(timer / 60);
         int sec = Mathf.FloorToInt(timer - min * 60);
-        timerDisplay.text = string.Format("{0:00}:{1:00}", min, sec);
+        timerDisplay.text = string.Format("{0:00}:{1:00}", min, sec); // MM:SS
     }
 
     void DisplayTally()
     {
         tally.text = string.Format("{0:00} - {1:00}", PlayerPrefs.GetInt("ScoreBlue"), PlayerPrefs.GetInt("ScoreRed"));
+    }
+
+    void DisplayPlayer()
+    {
+        playerTurn.text = gameManager.currentPlayer.ToString();
     }
 
     public void ShowPopUp()
@@ -64,7 +70,7 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("ScoreRed", 0);
         PlayerPrefs.SetInt("ScoreBlue", 0);
         PlayerPrefs.Save();
-        SceneManager.LoadScene(1); // Go to GameScene
+        SceneManager.LoadScene(1); // Go to GameEasy3
     }
 
     public void QuitToMenu()
@@ -73,11 +79,11 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("ScoreRed", 0);
         PlayerPrefs.SetInt("ScoreBlue", 0);
         PlayerPrefs.Save();
-        SceneManager.LoadScene(0); // this is mainmenu
+        SceneManager.LoadScene(0); // this is MainMenu
     }
 
     public void NewRound()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(1); // reload the scene, tally stays saved in PlayerPrefs
     }
 }

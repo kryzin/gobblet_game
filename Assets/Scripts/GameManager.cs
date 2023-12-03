@@ -4,29 +4,28 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public UIManager uiManager;
     public enum PlayerColor { Red, Blue };
     public Board board;
-
     public PlayerColor currentPlayer;
     public Piece selectedPiece;
     public Square selectedSquare;
 
     public int scoreRed = 0;
     public int scoreBlue = 0;
-    private bool checkOnce = false;
     public bool isEnd = false;
+    public bool canSelect = true;
 
     void Start()
     {
-        checkOnce = false;
         Debug.Log("Player Red starts");
         LoadScores();
         board.InitializeBoard();
-        currentPlayer = PlayerColor.Red; // red starts the game
+        currentPlayer = (UnityEngine.Random.Range(0, 2) == 0) ? PlayerColor.Red : PlayerColor.Blue; // random side starts the game
     }
 
     void Update()
@@ -39,7 +38,7 @@ public class GameManager : MonoBehaviour
                 {
                     board.PlacePiece(selectedPiece, selectedSquare);
                     selectedSquare.PlacePiece(selectedPiece);
-                    selectedPiece.PlacePiece();
+                    selectedPiece.isUsed = true;
                     MovePiece();
                     SwitchTurn();
                 }
@@ -83,11 +82,11 @@ public class GameManager : MonoBehaviour
 
     public bool IsValidMove(Piece piece, Square square)
     {
-        if (!square.IsOccupied)
+        if (!square.isOccupied)
         {
             return true;
         }
-        else if (piece.size > square.OccupyingPiece.size)
+        else if (piece.size > square.occupyingPiece.size)
         {
             return true;
         }
@@ -96,18 +95,12 @@ public class GameManager : MonoBehaviour
 
     public void MovePiece() // moves selected Piece to center of selected Square
     {
+        canSelect = false;
         float sizeAdd;
-        if (selectedPiece.size == Piece.Size.Small) sizeAdd = 6f;
-        else if (selectedPiece.size == Piece.Size.Medium) sizeAdd = 9f;
-        else sizeAdd = 15.5f;
+        if (selectedPiece.size == Piece.Size.Small) sizeAdd = 17f;
+        else if (selectedPiece.size == Piece.Size.Medium) sizeAdd = 15f;
+        else sizeAdd = 16f;
         StartCoroutine(MovePieceCoroutine(selectedPiece, selectedSquare, sizeAdd));
-        //Vector3 startingPosition = selectedPiece.transform.position;
-        //Vector3 targetPosition = selectedSquare.transform.position;
-        //targetPosition.y += 2f;
-
-        //selectedPiece.transform.position = Vector3.Lerp(startingPosition, targetPosition, Time.deltaTime * speed);
-        //selectedPiece.transform.position = targetPosition;
-        //Debug.Log("move made");
         Rigidbody pieceRigidbody = selectedPiece.GetComponent<Rigidbody>();
         pieceRigidbody.isKinematic = true;
     }
@@ -136,17 +129,14 @@ public class GameManager : MonoBehaviour
         
         //selectedPiece.transform.position = targetPosition;
         Debug.Log("move made");
+        canSelect = true;
     }
 
     public void GameOver()
     {
         isEnd = true;
-        if (!checkOnce)
-        {
-            if (board.winner == PlayerColor.Red) scoreRed += 1;
-            else scoreBlue += 1;
-        }
-        checkOnce = true;
+        if (board.winner == PlayerColor.Red) scoreRed += 1;
+        else scoreBlue += 1;
 
         PlayerPrefs.SetInt("ScoreRed", scoreRed);
         PlayerPrefs.SetInt("ScoreBlue", scoreBlue);

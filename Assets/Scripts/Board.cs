@@ -8,7 +8,7 @@ public class Board : MonoBehaviour
     public bool isGameOver = false;
     public GameManager gameManager;
     public GameManager.PlayerColor winner;
-    private bool checkOnce = false;
+    private bool checkOnce = false; // to not add scores each update after the game is over
 
     void Update()
     {
@@ -17,7 +17,7 @@ public class Board : MonoBehaviour
         {
             if(!checkOnce)
             {
-                Debug.Log("GAME OVER");
+                Debug.Log("GAME OVER, WINNER: " + winner.ToString());
                 gameManager.GameOver();
             }
             checkOnce = true;
@@ -27,7 +27,6 @@ public class Board : MonoBehaviour
     public void InitializeBoard()
     {
         checkOnce = false;
-        Debug.Log("starting game");
         for (int i = 0; i < 3; i++) // resetting board state
         {
             for (int j = 0; j < 3; j++)
@@ -45,7 +44,7 @@ public class Board : MonoBehaviour
         board[row, col] = piece;
     }
 
-    public void IsGameOver()
+    public void IsGameOver() // void rather than bool to also pass winner color
     {
         // Check rows
         for (int i = 0; i < 3; i++)

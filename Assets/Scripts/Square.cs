@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 
 public class Square : MonoBehaviour
 {
-    public bool IsOccupied {  get; private set; }
-    public Piece OccupyingPiece { get; private set; }
+    public bool isOccupied = false;
+    public Piece occupyingPiece = null;
     private bool isHovering = false;
     public GameManager gameManager;
 
@@ -16,19 +16,19 @@ public class Square : MonoBehaviour
     public Material outlineMaterial;
     private Renderer squareRenderer;
 
-    // for saving board placement
+    // for saving board placement - set in inspector
     public int row;
     public int col;
 
     void Start()
     {
         squareRenderer = GetComponent<Renderer>();
-        originalMaterial = squareRenderer.material;
+        originalMaterial = squareRenderer.material; // save for resetting after highlighting
     }
 
     void Update()
     {
-        if (gameManager.selectedPiece != null)
+        if (gameManager.selectedPiece != null) // only able to select Square after selecting a Piece
         {
             if (isHovering)
             {
@@ -43,21 +43,20 @@ public class Square : MonoBehaviour
 
     public void PlacePiece(Piece piece)
     {
-        IsOccupied = true;
-        OccupyingPiece = piece;
+        isOccupied = true;
+        occupyingPiece = piece;
     }
 
     public void RemovePiece()
     {
-        IsOccupied = false;
-        OccupyingPiece = null;
+        isOccupied = false;
+        occupyingPiece = null;
     }
 
     public void OnMouseDown()
     {
-        if (!gameManager.isEnd)
+        if (!gameManager.isEnd) // block after end of game
         {
-            Debug.Log("PLACEMENT Click: " + gameObject.name);
             gameManager.SelectSquare(this);
         }
     }
@@ -69,7 +68,7 @@ public class Square : MonoBehaviour
         }
     }
 
-    public void OnMouseExit() // when you stop hovering
+    public void OnMouseExit()
     {
         if (gameManager.selectedSquare == null)
         {

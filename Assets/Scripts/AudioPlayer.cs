@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioPlayer : MonoBehaviour
 {
     public AudioSource audioSource;
     private static AudioPlayer instance;
 
-    private void Awake()
+    private void Awake() // this makes the audio still play when changing scenes
     {
          if (instance == null)
          {
@@ -15,22 +16,6 @@ public class AudioPlayer : MonoBehaviour
          else
         {
             Destroy(gameObject);
-        }
-    }
-
-    public void PlayAudio()
-    {
-        if (audioSource != null)
-        {
-            audioSource.Play();
-        }
-    }
-
-    public void StopAudio()
-    {
-        if (audioSource != null && audioSource.isPlaying)
-        {
-            audioSource.Stop();
         }
     }
 }

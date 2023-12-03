@@ -25,7 +25,7 @@ public class Piece : MonoBehaviour
     public Material outlineMaterial;
     private Renderer pieceRenderer;
 
-    // for selecting
+    // cant move if its already been moved
     public bool isUsed = false;
 
 
@@ -39,7 +39,7 @@ public class Piece : MonoBehaviour
     void Update()
     {
         if (gameManager.currentPlayer == PlayerColor.Red && color == PlayerColor.Red && !isUsed ||
-        gameManager.currentPlayer == PlayerColor.Blue && color == PlayerColor.Blue && !isUsed)
+        gameManager.currentPlayer == PlayerColor.Blue && color == PlayerColor.Blue && !isUsed) // apply lifting/highlighting only if its currentTurn color
         {
             if (isHovering)
             {
@@ -52,17 +52,11 @@ public class Piece : MonoBehaviour
         }
     }
 
-    public void PlacePiece()
-    {
-        isUsed = true;
-    }
-
     public void OnMouseDown()
     {
-        if (!gameManager.isEnd)
+        if (!gameManager.isEnd && gameManager.canSelect) // canSelect just to minimize objects running into each other
         {
-            Debug.Log("clicked on Used: " + isUsed);
-            if (!isUsed && color == gameManager.currentPlayer)
+            if (!isUsed && color == gameManager.currentPlayer) // only interact with currentTurn color
             {
                 if (gameManager.selectedPiece != null && gameManager.selectedPiece != this)
                 {
@@ -70,7 +64,7 @@ public class Piece : MonoBehaviour
                     gameManager.selectedPiece.ResetSelection();
                     gameManager.DeselectPiece();
                 }
-                Debug.Log("Click " + gameObject.name);
+                // Debug.Log("Click " + gameObject.name);
                 isSelected = true;
                 gameManager.SelectPiece(this);
                 ClickHover();
@@ -80,7 +74,7 @@ public class Piece : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        if (!isUsed && !gameManager.isEnd)
+        if (!isUsed && !gameManager.isEnd && gameManager.canSelect)
         {
             isHovering = true;
         }
@@ -92,7 +86,7 @@ public class Piece : MonoBehaviour
         {
             isHovering = false;
         }
-        else if (!isUsed && !gameManager.isEnd)
+        else if (!isUsed && !gameManager.isEnd && gameManager.canSelect)
         {
             ClickHover();
         }
@@ -116,7 +110,6 @@ public class Piece : MonoBehaviour
     {
         Vector3 targetPosition = new Vector3(initialPosition.x, initialPosition.y + clickHoverAmount, initialPosition.z);
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * hoverSpeed);
-
         pieceRenderer.material = outlineMaterial;
     }
 
