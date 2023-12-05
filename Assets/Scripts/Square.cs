@@ -55,7 +55,7 @@ public class Square : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (!gameManager.isEnd) // block after end of game
+        if (!gameManager.isEnd && gameManager.IsValidMove(gameManager.selectedPiece, this)) // block after end of game
         {
             gameManager.SelectSquare(this);
         }
