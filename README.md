@@ -1,6 +1,8 @@
 # Gobblet Game (3D)
 
 Karolina Ryzińska/162272
+[Download .zip with executables](https://kryzin.itch.io/gobbletgame)
+*password: gobblet!game*
 
 ## Gameplay Showcase
 
