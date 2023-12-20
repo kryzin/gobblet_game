@@ -1,8 +1,9 @@
 # Gobblet Game (3D)
 
 Karolina Ryzińska/162272
-[Download .zip with executables](https://kryzin.itch.io/gobbletgame)
-*password: gobblet!game*
+
+
+[https://kryzin.itch.io/gobbletgame](https://kryzin.itch.io/gobbletgame)
 
 ## Gameplay Showcase
 
@@ -17,4 +18,4 @@ https://github.com/kryzin/game_unity/assets/76969276/224b5522-cd18-441e-ab68-88f
 
 ### Attributions
 
-- sound on/off icons from: [Speaker icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/speaker)
+- sound on/off icons from [Speaker icons created by Freepik - Flaticon](https://www.flaticon.com/free-icons/speaker)
