@@ -3,6 +3,8 @@
 A simple implementation of a Gobblet Game in Unity 3D.
 [https://kryzin.itch.io/gobbletgame](https://kryzin.itch.io/gobbletgame)
 
+The game was made as a final project for a "Projektowanie Gier w Środowisku Unity" class at UWM in Olsztyn.
+
 ## Gameplay Showcase
 
 https://github.com/kryzin/game_unity/assets/76969276/224b5522-cd18-441e-ab68-88f0f9a76117
